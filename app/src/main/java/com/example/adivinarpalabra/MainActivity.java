@@ -23,13 +23,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private String palabra;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        palabra = findViewById(R.id.palabraAdivinar).toString();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
     }
 
@@ -37,26 +37,28 @@ public class MainActivity extends AppCompatActivity {
         createSimpleDialog();
     }
     public void createSimpleDialog(){
+        EditText et1 = (EditText) findViewById(R.id.palabraAdivinar);
+        String palabra = et1.getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Comprobacion");
-        builder.setMessage("Palabra correcta");
-        builder.setPositiveButton("Validar", new DialogInterface.OnClickListener() {
+        builder.setMessage("Comprobando....");
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (palabra.equals("pantalla")) {
-                    Toast.makeText(MainActivity.this,"ACEPTAR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"ACERTASTE", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(MainActivity.this,"CANCELAR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"FALLASTE", Toast.LENGTH_SHORT).show();
                 }
             }
         }).setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
+            Toast.makeText(MainActivity.this,"CANCELAR",Toast.LENGTH_SHORT).show();
             }
         });
 
-
+        builder.create();
         builder.show();
     }
 }
